@@ -7,6 +7,10 @@ import {provideHttpClient} from '@angular/common/http';
 import {provideStore} from '@ngrx/store';
 import {userReducer} from './state/user/user.reducer';
 
+/**
+ * @name appConfig
+ * @description The application configuration object. Includes ngrx stores.
+ */
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),

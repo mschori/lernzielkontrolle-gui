@@ -1,7 +1,11 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
 import {NavbarComponent} from './navbar/navbar.component';
 
+/**
+ * @name AppComponent
+ * @description This is the root component of the application
+ */
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -10,5 +14,4 @@ import {NavbarComponent} from './navbar/navbar.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'athena-angular-frontend';
 }

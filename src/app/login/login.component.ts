@@ -10,7 +10,10 @@ import {selectUser, selectUserIsLoggedIn} from '../state/user/user.selectors';
 import {AsyncPipe, NgIf} from '@angular/common';
 import {setUser} from '../state/user/user.actions';
 
-
+/**
+ * @name LoginComponent
+ * @description This component is used to manage the login process of the application.
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -36,6 +39,10 @@ export class LoginComponent {
     this.userIsLoggedIn$ = this.store.select(selectUserIsLoggedIn);
   }
 
+  /**
+   * @name loginWithGoogle
+   * @description This function is used to login with a Google account.
+   */
   loginWithGoogle() {
     signInWithPopup(this.firebaseService.getAuth(), this.firebaseService.getGoogleProvider())
       .then(async (result) => {
@@ -62,6 +69,10 @@ export class LoginComponent {
     });
   }
 
+  /**
+   * @name setUserToStore
+   * @description This function is used to set a user to the ngrx store -- for testing purposes.
+   */
   setUserToStore() {
     this.store.dispatch(setUser({
       user: {

@@ -5,6 +5,10 @@ import {MatIcon} from '@angular/material/icon';
 import {NgClass} from '@angular/common';
 import {MatListItem, MatNavList} from '@angular/material/list';
 
+/**
+ * @name NavbarComponent
+ * @description This component is responsible for the navigation bar of the application.
+ */
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -24,6 +28,4 @@ import {MatListItem, MatNavList} from '@angular/material/list';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-
-
 }

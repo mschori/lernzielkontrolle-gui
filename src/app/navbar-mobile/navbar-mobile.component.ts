@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
+/**
+ * @name NavbarMobileComponent
+ * @description This component is responsible for rendering the mobile navbar.
+ */
 @Component({
   selector: 'app-navbar-mobile',
   standalone: true,
@@ -8,5 +12,4 @@ import { Component } from '@angular/core';
   styleUrl: './navbar-mobile.component.scss'
 })
 export class NavbarMobileComponent {
-
 }
