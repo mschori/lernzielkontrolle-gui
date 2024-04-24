@@ -1,0 +1,19 @@
+<section>
+  <div *ngIf="(user$ | async); let user">
+    User-Name: {{ user.firstname }} {{ user.lastname }}
+  </div>
+  <div *ngIf="(user$ | async); let user">
+    User-ID: {{ user.id }}
+  </div>
+  <div>
+    User login state: {{ (userIsLoggedIn$ | async) ? 'True' : 'False' }}
+  </div>
+  <div class="d-flex vh-100 align-items-center justify-content-center">
+    <div>
+      <button (click)="loginWithGoogle()">Login with Google</button>
+    </div>
+  </div>
+  <div>
+    <button (click)="setUserToStore()">set user to store</button>
+  </div>
+</section>
