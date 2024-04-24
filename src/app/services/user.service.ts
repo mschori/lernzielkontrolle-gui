@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {User} from '../interfaces/user';
+import {jwtDecode} from 'jwt-decode';
 
 /**
  * @name getStateUser
@@ -17,7 +18,7 @@ export const getStateUser = (): User => {
     firstname: '',
     lastname: '',
     groups: [],
-    tokens: {accessToken: '', refreshToken: ''},
+    tokens: {access: '', refresh: ''},
     isLoggedIn: false
   };
 };
@@ -31,10 +32,15 @@ export const getStateUser = (): User => {
 })
 export class UserService {
 
-  private user!: User;
+  private user: User = getStateUser();
 
-  constructor() {
-    getStateUser();
+  /**
+   * @name loadUser
+   * @description This function is used to reload the user to this service.
+   * @private
+   */
+  private loadUser() {
+    this.user = getStateUser();
   }
 
   /**
@@ -63,5 +69,34 @@ export class UserService {
    */
   private saveUserToLocalStorage() {
     localStorage.setItem('user', JSON.stringify(this.user));
+  }
+
+  /**
+   * @name isAccessTokenValid
+   * @description This function is used to check if the access token is valid.
+   * @private
+   */
+  private isAccessTokenValid(): boolean {
+    let isValid: boolean = false;
+    if (this.user.tokens.access) {
+      try {
+        const decoded = jwtDecode(this.user.tokens.access);
+        if (decoded.exp) {
+          isValid = decoded.exp * 1000 > Date.now();
+        }
+      } catch (Error) {
+        isValid = false;
+      }
+    }
+    return isValid;
+  }
+
+  /**
+   * @name isUserLoggedIn
+   * @description This function is used to check if the user is logged in and the jwt token is valid.
+   */
+  isUserLoggedIn(): boolean {
+    this.loadUser();
+    return this.user.isLoggedIn && this.isAccessTokenValid();
   }
 }

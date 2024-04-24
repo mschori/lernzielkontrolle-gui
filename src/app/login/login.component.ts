@@ -81,7 +81,7 @@ export class LoginComponent {
         firstname: 'bli',
         lastname: 'bla blub',
         groups: [],
-        tokens: {accessToken: '', refreshToken: ''},
+        tokens: {access: '', refresh: ''},
         isLoggedIn: true
       }
     }));
