@@ -21,7 +21,6 @@ export class AuthService {
    * @param firebaseIdToken {string} The Firebase ID token.
    */
   loginToBackend(firebaseIdToken: string): Observable<User> {
-    console.log('Logging in to backend with Firebase ID token: ' + firebaseIdToken);
     return this.http.post<User>('http://localhost:8000/api/v1/auth/login', {'firebaseIdToken': firebaseIdToken});
   }
 }

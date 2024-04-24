@@ -42,7 +42,7 @@ export const routes: Routes = [
     title: 'Login',
     component: LoginComponent,
     data: {
-      show: true,
+      show: false,
       loginRequired: false
     }
   }

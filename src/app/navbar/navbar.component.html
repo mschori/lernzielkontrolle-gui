@@ -9,6 +9,13 @@
         </a>
       </div>
     </mat-nav-list>
+    <mat-divider/>
+    <mat-nav-list *ngIf="(user$ | async); let user">
+      <div>
+        <a *ngIf="!user.isLoggedIn" mat-list-item routerLink="/login">Login</a>
+        <a *ngIf="user.isLoggedIn" mat-list-item (click)="logout()">Logout</a>
+      </div>
+    </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <router-outlet/>

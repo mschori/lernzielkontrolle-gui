@@ -44,6 +44,15 @@ export class UserService {
   }
 
   /**
+   * @name deleteUserFromLocalStorage
+   * @description This function is used to delete the user from local storage.
+   * @private
+   */
+  private deleteUserFromLocalStorage() {
+    localStorage.removeItem('user');
+  }
+
+  /**
    * @name setUser
    * @description This function is used to set the user in the service and save it to local storage.
    * @param user {User} The user object.
@@ -98,5 +107,13 @@ export class UserService {
   isUserLoggedIn(): boolean {
     this.loadUser();
     return this.user.isLoggedIn && this.isAccessTokenValid();
+  }
+
+  /**
+   * @name logout
+   * @description This function is used to logout the user from the application.
+   */
+  async logout() {
+    this.deleteUserFromLocalStorage();
   }
 }

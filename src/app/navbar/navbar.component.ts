@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import {MatListItem, MatNavList} from '@angular/material/list';
@@ -9,6 +9,9 @@ import {User} from '../interfaces/user';
 import {Observable} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {routes} from '../app.routes';
+import {MatDivider} from '@angular/material/divider';
+import {UserService} from '../services/user.service';
+import {resetUser} from '../state/user/user.actions';
 
 /**
  * @name NavbarComponent
@@ -29,7 +32,8 @@ import {routes} from '../app.routes';
     RouterLink,
     NgForOf,
     NgIf,
-    AsyncPipe
+    AsyncPipe,
+    MatDivider
 
   ],
   templateUrl: './navbar.component.html',
@@ -40,6 +44,18 @@ export class NavbarComponent {
   user$: Observable<User> = this.store.select(selectUser);
   _routes = routes;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private userService: UserService, private router: Router) {
+  }
+
+  /**
+   * @name logout
+   * @description This function is used to logout the user from the application.
+   */
+  logout() {
+    this.userService.logout()
+      .then(() => {
+        this.store.dispatch(resetUser());
+        return this.router.navigate(['/login']);
+      });
   }
 }

@@ -50,7 +50,6 @@ export class LoginComponent {
         this.authService.loginToBackend(token ?? '').subscribe({
           next: (user) => {
             user.isLoggedIn = true;
-            console.log('User from backend', user);
             this.userService.setUser(user);
             this.store.dispatch(setUser({user}));
           },
