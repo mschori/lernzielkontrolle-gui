@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from '../interfaces/user';
 import {jwtDecode} from 'jwt-decode';
+import {Group} from '../interfaces/group';
 
 /**
  * @name getStateUser
@@ -115,5 +116,23 @@ export class UserService {
    */
   async logout() {
     this.deleteUserFromLocalStorage();
+  }
+
+  /**
+   * @name hasGroup
+   * @description This function is used to check if the user has a specific group.
+   * @param group {string} The group name to check.
+   */
+  hasGroup(group: Group): boolean {
+    return this.user.groups.map(g => g.name.toLowerCase()).includes(group.name.toLowerCase());
+  }
+
+  /**
+   * @name hasAnyGroup
+   * @description This function is used to check if the user has any of the groups.
+   * @param groups {string[]} The groups to check.
+   */
+  hasAnyGroup(groups: Group[]): boolean {
+    return groups.some(g => this.hasGroup(g));
   }
 }

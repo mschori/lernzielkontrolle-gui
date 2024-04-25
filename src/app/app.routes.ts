@@ -3,6 +3,8 @@ import {LoginComponent} from './login/login.component';
 import {isLoggedInGuard} from './guards/is-logged-in.guard';
 import {SecretPageComponent} from './secret-page/secret-page.component';
 import {HomeComponent} from './home/home.component';
+import {Group} from './enums/group';
+import {hasGroupGuard} from './guards/has-group.guard';
 
 /**
  * @name routes
@@ -15,7 +17,9 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
     data: {
-      show: false
+      show: false,
+      loginRequired: false,
+      groups: []
     }
   },
   {
@@ -24,17 +28,19 @@ export const routes: Routes = [
     component: HomeComponent,
     data: {
       show: true,
-      loginRequired: false
+      loginRequired: false,
+      groups: []
     }
   },
   {
     path: 'secret-page',
     title: 'Secret Page',
     component: SecretPageComponent,
-    canActivate: [isLoggedInGuard],
+    canActivate: [isLoggedInGuard, hasGroupGuard],
     data: {
       show: true,
-      loginRequired: true
+      loginRequired: true,
+      groups: [{id: 0, name: Group[Group.STUDENT]}]
     }
   },
   {
@@ -43,7 +49,8 @@ export const routes: Routes = [
     component: LoginComponent,
     data: {
       show: false,
-      loginRequired: false
+      loginRequired: false,
+      groups: []
     }
   }
 ];
