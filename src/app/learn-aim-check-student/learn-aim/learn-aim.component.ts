@@ -6,6 +6,9 @@ import {MatChip, MatChipSet} from '@angular/material/chips';
 import {NgForOf, NgIf} from '@angular/common';
 import {MatTooltip} from '@angular/material/tooltip';
 import {LearnAimCheck} from '../../interfaces/learn-aim-check';
+import {MatDivider} from '@angular/material/divider';
+import {LearnAimCheckComponent} from '../learn-aim-check/learn-aim-check.component';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-learn-aim',
@@ -19,7 +22,10 @@ import {LearnAimCheck} from '../../interfaces/learn-aim-check';
     MatChip,
     NgForOf,
     MatTooltip,
-    NgIf
+    NgIf,
+    MatDivider,
+    LearnAimCheckComponent,
+    MatButton
   ],
   templateUrl: './learn-aim.component.html',
   styleUrl: './learn-aim.component.scss'
@@ -27,40 +33,35 @@ import {LearnAimCheck} from '../../interfaces/learn-aim-check';
 export class LearnAimComponent {
 
   @Input({required: true}) learnAim!: LearnAim;
-  isFirstStagePresent = false;
-  isSecondStagePresent = false;
-  isThirdStagePresent = false;
-  isFirstStageApproved = false;
-  isSecondStageApproved = false;
-  isThirdStageApproved = false;
-
-  firstStageColor = 'warn';
+  firstStageColor = 'secondary';
+  secondStageColor = 'secondary';
+  thirdStageColor = 'secondary';
+  canCrateNewCheck = true;
 
   constructor() {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
     if (changes['learnAim'].currentValue) {
       this.setStageInfos(changes['learnAim'].currentValue.checked);
     }
   }
 
+  /**
+   * @name setStageInfos
+   * @description This method sets the stage infos for the learn aim.
+   * @param checks - The checks for the learn aim.
+   */
   setStageInfos(checks: LearnAimCheck[]) {
     checks.forEach((check) => {
       if (check.closeStage === 1) {
-        this.isFirstStagePresent = true;
-        this.isFirstStageApproved = check.isApproved;
+        this.firstStageColor = check.isApproved ? 'success' : 'warning';
       } else if (check.closeStage === 2) {
-        this.isSecondStagePresent = true;
-        this.isSecondStageApproved = check.isApproved;
+        this.secondStageColor = check.isApproved ? 'success' : 'warning';
       } else if (check.closeStage === 3) {
-        this.isThirdStagePresent = true;
-        this.isThirdStageApproved = check.isApproved;
+        this.thirdStageColor = check.isApproved ? 'success' : 'warning';
       }
+      this.canCrateNewCheck = check.isApproved;
     });
-
-    console.log(this.isFirstStagePresent);
-    console.log(this.isFirstStageApproved);
   }
 }

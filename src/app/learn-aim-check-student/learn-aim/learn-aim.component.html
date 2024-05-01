@@ -6,29 +6,9 @@
       </div>
       <div class="learn-aim-panel-title-stages">
         <mat-icon matTooltip="{{learnAim.exampleText}}" style="margin-right: 1em;">school</mat-icon>
-        <mat-chip-set>
-          <mat-chip *ngIf="isFirstStagePresent && isFirstStageApproved" class="stage-cleared">
-            Erklärt
-          </mat-chip>
-          <mat-chip *ngIf="isFirstStagePresent && !isFirstStageApproved" class="stage-present">
-            Erklärt
-          </mat-chip>
-          <mat-chip *ngIf="!isFirstStagePresent && !isFirstStageApproved">
-            Erklärt
-          </mat-chip>
-          <mat-chip *ngIf="isSecondStagePresent && isSecondStageApproved" class="stage-cleared">
-            Geübt a
-          </mat-chip>
-          <mat-chip *ngIf="isSecondStagePresent && !isSecondStageApproved" class="mat-warn" [color]="firstStageColor">
-            Geübt b
-          </mat-chip>
-          <mat-chip *ngIf="!isSecondStagePresent && !isSecondStageApproved" class="test-class">
-            Geübt c
-          </mat-chip>
-          <mat-chip>
-            Selbstständig
-          </mat-chip>
-        </mat-chip-set>
+        <span class="badge bg-{{firstStageColor}} me-1">Erklärt</span>
+        <span class="badge bg-{{secondStageColor}} me-1">Geübt</span>
+        <span class="badge bg-{{thirdStageColor}} me-1">Selbstständig</span>
       </div>
     </mat-panel-title>
   </mat-expansion-panel-header>
@@ -38,4 +18,6 @@
       <mat-chip *ngFor="let t of learnAim.tags">{{ t.tagName }}</mat-chip>
     </mat-chip-set>
   </div>
+  <app-learn-aim-check *ngFor="let lac of learnAim.checked" [learnAim]="learnAim" [learnAimCheck]="lac"/>
+  <button *ngIf="canCrateNewCheck" mat-flat-button color="primary">Abschluss beantragen</button>
 </mat-expansion-panel>

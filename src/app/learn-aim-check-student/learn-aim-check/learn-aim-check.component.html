@@ -1,0 +1,23 @@
+<mat-card style="margin-top: 1em; margin-bottom: 1em;">
+  <mat-card-header>
+    <mat-card-title class="card-title">
+      Abschluss für <span class="badge bg-{{stageBadgeColor}} ms-2">{{ stageName }}</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    {{ learnAimCheck.comment }}
+    <mat-divider style="margin-top: 1em; margin-bottom: 1em;"/>
+    <div class="d-flex justify-content-between align-items-center">
+      <div *ngIf="learnAimCheck.isApproved">
+        <i>Approved by {{ learnAimCheck.approvedBy }} at {{ learnAimCheck.updatedAt | date }}</i>
+      </div>
+      <div *ngIf="!learnAimCheck.isApproved">
+        <i>Last update at {{ learnAimCheck.updatedAt |date }}</i>
+      </div>
+      <div *ngIf="!learnAimCheck.isApproved">
+        <button mat-flat-button color="primary" style="margin-right: 0.5em;" (click)="openDialog()">Edit</button>
+        <button mat-flat-button color="warn">Delete</button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
