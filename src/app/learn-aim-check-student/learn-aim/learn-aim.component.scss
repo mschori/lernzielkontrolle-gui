@@ -1,0 +1,23 @@
+.learn-aim-panel-title {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.learn-aim-panel-title-stages {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  min-width: fit-content;
+}
+
+.stage-cleared {
+  background-color: green;
+}
+
+.stage-present {
+  background-color: yellow;
+}

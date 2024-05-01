@@ -1,10 +1,10 @@
 import {Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {isLoggedInGuard} from './guards/is-logged-in.guard';
-import {SecretPageComponent} from './secret-page/secret-page.component';
 import {HomeComponent} from './home/home.component';
 import {Group} from './enums/group';
 import {hasGroupGuard} from './guards/has-group.guard';
+import {LearnAimCheckStudentComponent} from './learn-aim-check-student/learn-aim-check-student.component';
 
 /**
  * @name routes
@@ -35,7 +35,7 @@ export const routes: Routes = [
   {
     path: 'secret-page',
     title: 'Secret Page',
-    component: SecretPageComponent,
+    component: LearnAimCheckStudentComponent,
     canActivate: [isLoggedInGuard, hasGroupGuard],
     data: {
       show: true,

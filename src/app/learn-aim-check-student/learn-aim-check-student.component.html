@@ -1,0 +1,9 @@
+<div>
+  <button (click)="logLearnAimList()">Log LearnAimList</button>
+</div>
+
+<div class="action-competences-student-view">
+  <div *ngFor="let ac of actionCompetences; index as i">
+    <app-action-competence [actionCompetence]="ac"/>
+  </div>
+</div>

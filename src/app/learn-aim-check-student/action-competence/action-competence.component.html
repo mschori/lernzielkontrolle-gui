@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ actionCompetence.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content style="margin-top: 1em; margin-bottom: 1em;">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon style="margin-right: 0.5em;">info</mat-icon>
+          Toggle description
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      {{ actionCompetence.description }}
+    </mat-expansion-panel>
+    <div *ngFor="let la of actionCompetence.learnAim; index as i" style="margin-top: 1em; margin-bottom: 1em">
+      <app-learn-aim [learnAim]="la"/>
+    </div>
+  </mat-card-content>
+</mat-card>
